@@ -1,0 +1,208 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/gui.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/wall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/vhs_shader.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Sfx/game_over.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sfx/oh-no-the-car-exploded.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Font/ModernDOS9x16.ttf" type="DynamicFontData" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 180, 208 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
+font_data = ExtResource( 12 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 150
+font_data = ExtResource( 12 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 70
+font_data = ExtResource( 12 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 1 )
+enemy_num = 5
+enemy = ExtResource( 6 )
+
+[node name="background" type="ParallaxBackground" parent="."]
+follow_viewport_scale = 2.0
+
+[node name="bricks" type="TextureRect" parent="background"]
+margin_right = 515.0
+margin_bottom = 323.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="left_border" type="TextureRect" parent="background"]
+margin_right = 294.0
+margin_bottom = 641.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="right_border" type="TextureRect" parent="background"]
+margin_left = 730.0
+margin_right = 1024.0
+margin_bottom = 641.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="walls" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wall" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 56 )
+
+[node name="wall2" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 120 )
+
+[node name="wall3" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 184 )
+
+[node name="wall4" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 248 )
+
+[node name="wall5" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 312 )
+
+[node name="wall6" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 376 )
+
+[node name="wall7" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 440 )
+
+[node name="wall8" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 504 )
+
+[node name="wall9" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, 568 )
+
+[node name="wall11" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 56 )
+
+[node name="wall12" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 120 )
+
+[node name="wall13" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 184 )
+
+[node name="wall14" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 248 )
+
+[node name="wall15" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 312 )
+
+[node name="wall16" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 376 )
+
+[node name="wall17" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 440 )
+
+[node name="wall18" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 504 )
+
+[node name="wall19" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, 568 )
+
+[node name="wall23" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 304, -8 )
+
+[node name="wall24" parent="walls" instance=ExtResource( 5 )]
+position = Vector2( 720, -8 )
+
+[node name="enemy_spawn" type="Area2D" parent="."]
+position = Vector2( 392, -6 )
+
+[node name="placeholder" parent="enemy_spawn" instance=ExtResource( 6 )]
+position = Vector2( 824, -99 )
+disabled = true
+
+[node name="collision" type="CollisionShape2D" parent="enemy_spawn"]
+position = Vector2( 120, -217 )
+shape = SubResource( 1 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 512, 512 )
+speed = 200
+
+[node name="GUI" parent="." instance=ExtResource( 8 )]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 41.0
+margin_bottom = 41.0
+
+[node name="instructions" type="RichTextLabel" parent="."]
+margin_left = 772.0
+margin_top = 66.0
+margin_right = 980.0
+margin_bottom = 142.0
+theme = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Press ESC to return to menu"
+text = "Press ESC to return to menu"
+scroll_active = false
+
+[node name="game_over" type="Label" parent="."]
+visible = false
+margin_left = 134.0
+margin_top = 198.0
+margin_right = 890.0
+margin_bottom = 349.0
+theme = SubResource( 3 )
+custom_colors/font_color = Color( 0.592157, 1, 0, 1 )
+text = "GAME OVER"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="press" type="Label" parent="game_over"]
+margin_top = 121.0
+margin_right = 756.0
+margin_bottom = 266.0
+theme = SubResource( 5 )
+custom_colors/font_color = Color( 0.847059, 1, 0.627451, 1 )
+text = "press ENTER
+to restart"
+align = 1
+
+[node name="vhs_shader" parent="." instance=ExtResource( 9 )]
+
+[node name="game_over_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -14.529
+mix_target = 2
+
+[node name="car_exploded" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -20.647
+
+[connection signal="visibility_changed" from="game_over" to="." method="_on_game_over_visibility_changed"]

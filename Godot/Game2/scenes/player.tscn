@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sprites/bluePlayer-1.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/tankPipe.png" type="Texture" id=2]
+[ext_resource path="res://scripts/player.gd" type="Script" id=3]
+[ext_resource path="res://scripts/pipe.gd" type="Script" id=4]
+[ext_resource path="res://scenes/bullet.tscn" type="PackedScene" id=5]
+
+[node name="player" type="KinematicBody2D"]
+script = ExtResource( 3 )
+bullet_speed = 200
+bullet_gravity = 100
+bullet_scene = ExtResource( 5 )
+bullet_spawn_path = NodePath("tank/pipe/bullet_spawn")
+
+[node name="tank" type="Sprite" parent="."]
+scale = Vector2( 0.166016, 0.166016 )
+texture = ExtResource( 1 )
+
+[node name="pipe" type="Sprite" parent="tank"]
+show_behind_parent = true
+position = Vector2( 0, -156.611 )
+scale = Vector2( 1.08235, 1 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="bullet_spawn" type="Position2D" parent="tank/pipe"]
+show_behind_parent = true
+position = Vector2( 517.567, 0 )
+scale = Vector2( 0.923916, 1 )
+
+[node name="collision" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 32, -37, 58, -16, 58, 21, 74, 21, 85, 32, 85, 69, 69, 85, -69, 85, -85, 69, -85, 32, -74, 21, -59, 21, -59, -15, -31, -37 )

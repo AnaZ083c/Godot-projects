@@ -1,0 +1,206 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes/moving_background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sfx/ui_select.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Sfx/ui_hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://Themes/options_theme.tres" type="Theme" id=4]
+[ext_resource path="res://Themes/title_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Themes/settings_theme.tres" type="Theme" id=6]
+[ext_resource path="res://Scripts/settings_menu_stuff_container.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/vhs_shader.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/enemy_num_slider_value.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/fullscreen_toggle.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/starting_value_slider.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/settings_save.gd" type="Script" id=15]
+
+[sub_resource type="Theme" id=3]
+
+[node name="menu" type="Node2D"]
+
+[node name="moving_background" parent="." instance=ExtResource( 1 )]
+
+[node name="menu_items" type="Control" parent="."]
+margin_right = 54.0
+margin_bottom = 54.0
+
+[node name="title" type="Label" parent="menu_items"]
+margin_top = 28.0
+margin_right = 1028.0
+margin_bottom = 198.0
+theme = ExtResource( 5 )
+custom_colors/font_color = Color( 0.92549, 1, 0, 1 )
+text = "Settings"
+align = 1
+valign = 1
+
+[node name="title_underline" type="Label" parent="menu_items/title"]
+margin_left = 1.0
+margin_top = 67.0
+margin_right = 1031.0
+margin_bottom = 237.0
+theme = ExtResource( 5 )
+text = ".............."
+align = 1
+valign = 1
+
+[node name="fullscreen" type="Label" parent="menu_items"]
+margin_left = 237.991
+margin_top = 250.0
+margin_right = 582.99
+margin_bottom = 293.0
+theme = ExtResource( 6 )
+text = "Toggle fullscreen"
+script = ExtResource( 12 )
+
+[node name="fullscreen" type="CheckBox" parent="menu_items/fullscreen"]
+margin_left = 429.0
+margin_top = -11.0
+margin_right = 453.0
+margin_bottom = 40.0
+focus_mode = 0
+theme = SubResource( 3 )
+enabled_focus_mode = 0
+align = 1
+
+[node name="vhs_on_off" type="Label" parent="menu_items"]
+margin_left = 237.991
+margin_top = 310.0
+margin_right = 582.99
+margin_bottom = 353.0
+theme = ExtResource( 6 )
+text = "Toggle VHS/CRT"
+
+[node name="vhs" type="CheckBox" parent="menu_items/vhs_on_off"]
+margin_left = 429.0
+margin_top = -11.0
+margin_right = 453.0
+margin_bottom = 40.0
+focus_mode = 0
+theme = SubResource( 3 )
+enabled_focus_mode = 0
+align = 1
+
+[node name="game_changing_settings" type="Control" parent="menu_items"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 15 )
+
+[node name="num_of_enemies" type="Label" parent="menu_items/game_changing_settings"]
+margin_left = 237.991
+margin_top = 440.0
+margin_right = 582.991
+margin_bottom = 483.0
+theme = ExtResource( 6 )
+text = "Number of enemies"
+
+[node name="enemy_num" type="HSlider" parent="menu_items/game_changing_settings/num_of_enemies"]
+margin_left = 429.0
+margin_top = -9.0
+margin_right = 527.0
+margin_bottom = 44.0
+theme = SubResource( 3 )
+min_value = 4.0
+max_value = 10.0
+value = 4.0
+
+[node name="value" type="Label" parent="menu_items/game_changing_settings/num_of_enemies/enemy_num"]
+margin_top = -15.0
+margin_right = 98.0
+margin_bottom = 28.0
+theme = ExtResource( 6 )
+text = "1"
+align = 1
+valign = 1
+script = ExtResource( 11 )
+
+[node name="starting_speed" type="Label" parent="menu_items/game_changing_settings"]
+margin_left = 237.991
+margin_top = 380.0
+margin_right = 582.99
+margin_bottom = 423.0
+theme = ExtResource( 6 )
+text = "Starting speed"
+
+[node name="starting_stage" type="HSlider" parent="menu_items/game_changing_settings/starting_speed"]
+margin_left = 429.0
+margin_top = -13.0
+margin_right = 527.0
+margin_bottom = 40.0
+theme = SubResource( 3 )
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="value" type="Label" parent="menu_items/game_changing_settings/starting_speed/starting_stage"]
+margin_top = -15.0
+margin_right = 98.0
+margin_bottom = 28.0
+theme = ExtResource( 6 )
+text = "1"
+align = 1
+valign = 1
+script = ExtResource( 13 )
+
+[node name="menu_stuff" type="CenterContainer" parent="menu_items"]
+margin_left = 289.0
+margin_top = 512.0
+margin_right = 736.0
+margin_bottom = 820.0
+
+[node name="settings_menu_stuff_container" type="GridContainer" parent="menu_items/menu_stuff"]
+margin_right = 447.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 255, 308 )
+custom_constants/hseparation = 119
+columns = 2
+script = ExtResource( 8 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="menu_items/menu_stuff/settings_menu_stuff_container"]
+visible = false
+margin_right = 152.0
+margin_bottom = 225.0
+theme = ExtResource( 4 )
+text = "
+
+"
+fit_content_height = true
+
+[node name="back" type="LinkButton" parent="menu_items/menu_stuff/settings_menu_stuff_container"]
+margin_right = 164.0
+margin_bottom = 74.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.788235, 0.94902, 0.552941, 1 )
+enabled_focus_mode = 0
+text = "Back"
+underline = 2
+
+[node name="save" type="LinkButton" parent="menu_items/menu_stuff/settings_menu_stuff_container"]
+margin_left = 283.0
+margin_right = 447.0
+margin_bottom = 74.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 0.788235, 0.94902, 0.552941, 1 )
+enabled_focus_mode = 0
+text = "Save"
+underline = 2
+
+[node name="vhs_shader" parent="." instance=ExtResource( 9 )]
+
+[node name="ui_hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+mix_target = 2
+
+[node name="ui_select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+mix_target = 2
+
+[connection signal="toggled" from="menu_items/fullscreen/fullscreen" to="menu_items/fullscreen" method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="menu_items/vhs_on_off/vhs" to="menu_items/vhs_on_off" method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="menu_items/vhs_on_off/vhs" to="vhs_shader" method="_on_vhs_toggled"]
+[connection signal="value_changed" from="menu_items/game_changing_settings/num_of_enemies/enemy_num" to="menu_items/game_changing_settings/num_of_enemies/enemy_num/value" method="_on_enemy_num_value_changed"]
+[connection signal="value_changed" from="menu_items/game_changing_settings/starting_speed/starting_stage" to="menu_items/game_changing_settings/starting_speed/starting_stage/value" method="_on_starting_stage_value_changed"]
+[connection signal="mouse_entered" from="menu_items/menu_stuff/settings_menu_stuff_container/back" to="menu_items/menu_stuff/settings_menu_stuff_container" method="_on_back_mouse_entered"]
+[connection signal="pressed" from="menu_items/menu_stuff/settings_menu_stuff_container/back" to="menu_items/menu_stuff/settings_menu_stuff_container" method="_on_back_pressed"]
+[connection signal="mouse_entered" from="menu_items/menu_stuff/settings_menu_stuff_container/save" to="menu_items/menu_stuff/settings_menu_stuff_container" method="_on_save_mouse_entered"]
+[connection signal="pressed" from="menu_items/menu_stuff/settings_menu_stuff_container/save" to="menu_items/game_changing_settings" method="_on_save_pressed"]
+[connection signal="pressed" from="menu_items/menu_stuff/settings_menu_stuff_container/save" to="menu_items/menu_stuff/settings_menu_stuff_container" method="_on_save_pressed"]
